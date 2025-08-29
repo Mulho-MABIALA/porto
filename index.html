@@ -5,99 +5,319 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mon Portfolio</title>
   <style>
+    /* ---------------- RESET ---------------- */
+    * {
+      margin: 0; /* Supprime les marges par défaut */
+      padding: 0; /* Supprime les espacements internes par défaut */
+      box-sizing: border-box; /* Inclut les bordures et padding dans la taille des éléments */
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-      color: #333;
+      font-family: Arial, sans-serif; /* Police principale */
+      background: #0a192f; /* Fond bleu foncé */
+      color: #ccd6f6; /* Texte clair */
     }
+
+    /* ---------------- NAVBAR ---------------- */
     header {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
+      position: fixed; /* Fixé en haut même au scroll */
+      top: 0;
+      left: 0;
+      width: 100%; /* Largeur pleine */
+      display: flex; /* Flexbox pour aligner logo et menu */
+      justify-content: space-between; /* Logo à gauche, menu à droite */
+      align-items: center; /* Centrage vertical */
+      padding: 20px 50px; /* Espacement interne */
+      background: rgba(10, 25, 47, 0.9); /* Couleur avec transparence */
+      backdrop-filter: blur(8px); /* Effet de flou sur l’arrière-plan */
+      z-index: 1000; /* Toujours au-dessus */
     }
-    header h1 {
-      margin: 0;
-    }
-    nav {
-      margin-top: 1rem;
-    }
-    nav a {
-      color: white;
+
+    /* Logo carré "M" */
+    .logo {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #64ffda; /* Bord vert/bleu clair */
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64ffda;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
       text-decoration: none;
-      margin: 0 10px;
     }
+
+    /* Menu de navigation */
+    nav ul {
+      list-style: none; /* Supprime les puces */
+      display: flex; /* Menu horizontal */
+      align-items: center;
+      gap: 40px; /* Espacement entre les liens */
+    }
+
+    nav ul li {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #ccd6f6;
+      transition: color 0.3s; /* Animation couleur */
+    }
+
+    nav ul li a span {
+      color: #64ffda; /* Numérotation en vert/bleu */
+      font-size: 12px;
+      margin-right: 5px;
+    }
+
+    nav ul li a:hover {
+      color: #64ffda; /* Changement couleur au survol */
+    }
+
+    /* ---------------- SECTIONS GÉNÉRALES ---------------- */
     section {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
+      padding: 100px 10%; /* Espacement autour des sections */
     }
-    .projects {
-      display: grid;
+
+    h2 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: #ccd6f6;
+      border-bottom: 2px solid #64ffda; /* Ligne décorative */
+      display: inline-block;
+    }
+
+    /* ---------------- HERO ---------------- */
+    .hero {
+      min-height: 100vh; /* Plein écran */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 10%;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      color: #ccd6f6;
+    }
+
+    .hero h1 span {
+      color: #64ffda; /* Met le nom en vert/bleu */
+    }
+
+    .hero p {
+      margin-top: 20px;
+      max-width: 600px;
+      color: #8892b0;
+      line-height: 1.6;
+    }
+
+    .hero .cta {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 12px 24px;
+      border: 1px solid #64ffda;
+      border-radius: 4px;
+      color: #64ffda;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .hero .cta:hover {
+      background: rgba(100, 255, 218, 0.1);
+    }
+
+    /* ---------------- PROJETS ---------------- */
+    .projets {
+      display: grid; /* Disposition en grille */
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
+      gap: 30px;
     }
-    .card {
-      background: white;
-      padding: 1rem;
+
+    .projet {
+      background: #112240;
+      padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
     }
+
+    .projet:hover {
+      transform: scale(1.05); /* Zoom au survol */
+    }
+
+    .projet img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+
+    .projet a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #64ffda;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* ---------------- EXPÉRIENCES ---------------- */
+    .experience {
+      background: #112240;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .experience h3 {
+      color: #ccd6f6;
+    }
+
+    .experience p {
+      color: #8892b0;
+    }
+
+    /* ---------------- FORMULAIRE CONTACT ---------------- */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Espacement entre les champs */
+      width: 50%; /* Taille du formulaire */
+      margin: 0 auto; /* Centre le formulaire horizontalement */
+    }
+
+    input, textarea, button {
+      padding: 15px; /* Champs plus grands */
+      border: none;
+      border-radius: 5px;
+      font-size: 16px; /* Texte plus lisible */
+    }
+
+    input, textarea {
+      background: #112240; /* Fond sombre */
+      color: #ccd6f6; /* Texte clair */
+    }
+
+    button {
+      background: #64ffda; /* Fond vert/bleu */
+      color: #0a192f; /* Texte foncé */
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #52e0c4;
+    }
+
+    /* Bouton téléchargement CV */
+    .cv-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: 1px solid #64ffda;
+      color: #64ffda;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .cv-btn:hover {
+      background: rgba(100, 255, 218, 0.1);
+    }
+
+    /* ---------------- FOOTER ---------------- */
     footer {
       text-align: center;
-      background: #333;
-      color: white;
-      padding: 1rem;
-      margin-top: 2rem;
+      padding: 20px;
+      background: #0a192f;
+      border-top: 1px solid #112240;
+      color: #8892b0;
     }
   </style>
 </head>
 <body>
 
+  <!-- ---------------- NAVBAR ---------------- -->
   <header>
-    <h1>Mon Portfolio</h1>
-    <p>Développeur Web & Designer</p>
+    <!-- Logo en forme de carré -->
+    <a href="#" class="logo">M</a>
+    <!-- Menu de navigation -->
     <nav>
-      <a href="#about">À propos</a>
-      <a href="#projects">Projets</a>
-      <a href="#contact">Contact</a>
+      <ul>
+        <li><a href="#about"><span>01.</span> À propos</a></li>
+        <li><a href="#experience"><span>02.</span> Expériences</a></li>
+        <li><a href="#projets"><span>03.</span> Projets</a></li>
+        <li><a href="#contact"><span>04.</span> Contact</a></li>
+      </ul>
     </nav>
   </header>
 
-  <section id="about">
-    <h2>À propos de moi</h2>
-    <p>
-      Salut ! Je suis passionné par le développement web et la création de solutions simples et élégantes.
-      Ce portfolio présente quelques projets réalisés.
-    </p>
+  <!-- ---------------- SECTION HERO ---------------- -->
+  <section class="hero" id="about">
+    <p>salut</p>
+    <h1><span>Mabiala Mulho.</span></h1>
+    <h1>Je construis des choses pour le web.</h1>
+    <p>Je suis un développeur full-stack spécialisé dans la création d’expériences digitales modernes, performantes et accessibles.</p>
+    <a href="#projets" class="cta">Voir mes projets</a>
   </section>
 
-  <section id="projects">
+  <!-- ---------------- SECTION PROJETS ---------------- -->
+  <section id="projets">
     <h2>Mes Projets</h2>
-    <div class="projects">
-      <div class="card">
+    <div class="projets">
+      <!-- Projet 1 -->
+      <div class="projet">
+        <img src="https://www.octotable.com/wp-content/uploads/2021/12/website-builder-ristoranti.jpg" alt="Projet 1">
         <h3>Projet 1</h3>
-        <p>Description rapide du projet.</p>
+        <p>Application de gestion de restaurant</p>
+        <a href="https://student.learn.gomycode.co/course" target="_blank">Voir en ligne</a>
       </div>
-      <div class="card">
+      <!-- Projet 2 -->
+      <div class="projet">
+        <img src="https://images-wixmp-530a50041672c69d335ba4cf.wixmp.com/templates/image/0599c4645e12c8c65058f454c72ed3b0e349d42dd379fae7396d91a5de4c5d53.jpg" alt="Projet 2">
         <h3>Projet 2</h3>
-        <p>Description rapide du projet.</p>
-      </div>
-      <div class="card">
-        <h3>Projet 3</h3>
-        <p>Description rapide du projet.</p>
+        <p>Site e-commerce moderne</p>
+        <a href="https://student.learn.gomycode.co/course" target="_blank">Voir en ligne</a>
       </div>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email : <a href="mailto:monemail@example.com">mulhomabiala29@gmail.com</a></p>
+  <!-- ---------------- SECTION EXPÉRIENCES ---------------- -->
+  <section id="experience">
+    <h2>Mes Expériences</h2>
+    <!-- Expérience 1 -->
+    <div class="experience">
+      <h3>Développeur Web - NSIA Assurance Vie</h3>
+      <p>Création d’applications internes, optimisation des bases de données.</p>
+    </div>
+    <!-- Expérience 2 -->
+    <div class="experience">
+      <h3>Stage - Projet universitaire</h3>
+      <p>Développement d’un système de gestion de pressing en PHP et TailwindCSS.</p>
+    </div>
   </section>
 
+  <!-- ---------------- SECTION CONTACT ---------------- -->
+  <section id="contact">
+    <h2>Contactez-moi</h2>
+    <!-- Formulaire de contact -->
+    <form>
+      <input type="text" placeholder="Votre Nom" required>
+      <input type="email" placeholder="Votre Email" required>
+      <textarea rows="5" placeholder="Votre Message" required></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
+    <!-- Bouton pour télécharger le CV -->
+    <a href="CV_Mabiala.pdf" download class="cv-btn">📄 Télécharger mon CV</a>
+  </section>
+
+  <!-- ---------------- FOOTER ---------------- -->
   <footer>
-    <p>&copy; 2025 Mon Portfolio - Tous droits réservés</p>
+    <p>© 2025 Mabiala Mulho | Tous droits réservés</p>
   </footer>
 
 </body>
